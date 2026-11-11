@@ -8,8 +8,6 @@ import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const isWindows=process.platform==='win32';
 const mocks=String.raw`$script:mock=Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'mock-state.json') -Encoding UTF8|ConvertFrom-Json
-$script:fakeHealth=$null
-if($script:mock.health){$script:fakeHealth=@{id='codex-grok-context-bridge-v1';directory=$InstallDirectory;pid=1234}}
 function Get-MockTask { [CmdletBinding()]param($TaskName) return [pscustomobject]@{Actions=@([pscustomobject]@{Arguments=('-File "'+(Join-Path $InstallDirectory 'Run-Bridge-Managed.ps1')+'"')})} }
 function Stop-MockTask {param($TaskName) [IO.File]::WriteAllText((Join-Path $PSScriptRoot 'stop-task.txt'),'yes')}
 function Unregister-MockTask { [CmdletBinding(SupportsShouldProcess=$true)]param($TaskName) [IO.File]::WriteAllText((Join-Path $PSScriptRoot 'unregister-task.txt'),'yes')}
@@ -26,7 +24,7 @@ function fixture(state,callback){
   assert.doesNotMatch(script,/\b(?:Get|Stop|Unregister)-ScheduledTask|\b(?:Get|Stop)-Process/);
   fs.writeFileSync(path.join(dir,'Uninstall-Bridge.ps1'),script);
   fs.writeFileSync(path.join(dir,'mock-state.json'),JSON.stringify(state));
-  fs.writeFileSync(path.join(dir,'Bridge-Common.ps1'),"function Read-BridgeHealth { return $script:fakeHealth }\n");
+  fs.writeFileSync(path.join(dir,'Bridge-Common.ps1'),"function Read-BridgeHealth { if($script:mock.health){return @{id='codex-grok-context-bridge-v1';directory=[IO.Path]::GetFullPath($InstallDirectory);pid=1234}};return $null }\n");
   fs.writeFileSync(path.join(dir,'Inspect-Bridge.ps1'),"param($InstallDirectory,$TaskName)\nGet-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'mock-state.json') -Encoding UTF8\n");
   const exe=path.join(process.env.SystemRoot||'C:/Windows','System32/WindowsPowerShell/v1.0/powershell.exe');
   const r=spawnSync(exe,['-NoLogo','-NoProfile','-ExecutionPolicy','Bypass','-File',path.join(dir,'Uninstall-Bridge.ps1'),'-InstallDirectory',path.join(dir,'installed'),'-TaskName','Mocked-Uninstall-Only'],{encoding:'utf8',windowsHide:true,timeout:20000});
