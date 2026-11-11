@@ -42,7 +42,7 @@ A provider can appear connected in OmniRoute and respond from another client, ye
 invalid "function_call_output" item: missing field `call_id`
 ```
 
-The bridge repairs **only the documented Grok context-record mismatch**, preserving real tool-call/result pairs. It also provides a supervised Windows sign-in task instead of relying on a late Startup-folder shortcut.
+The bridge repairs **the documented Grok context and search-history mismatches**, preserving real tool-call/result pairs. It also provides a supervised Windows sign-in task instead of relying on a late Startup-folder shortcut.
 
 This is **not a general Responses API translator**. Outages, invalid keys, unavailable models, subscription limits, and unrelated schema errors still need resolution in the relevant service.
 
@@ -50,7 +50,7 @@ This is **not a general Responses API translator**. Outages, invalid keys, unava
 
 | Feature | What you get |
 | --- | --- |
-| Targeted Grok compatibility | Known standalone Codex app-context outputs become lower-trust reference messages. |
+| Targeted Grok compatibility | Known app-context outputs and unsupported search-history markers become lower-trust reference messages. |
 | Other providers preserved | Non-target request bodies are forwarded unchanged. |
 | Tool history preserved | Valid tool pairs stay intact; no invented call IDs. |
 | Streaming | SSE bytes pass through without response parsing or buffering. |
@@ -194,8 +194,9 @@ flowchart LR
     C --> D[Authorized providers]
 ```
 
-For eligible Grok requests, only the observed `agent` records named `codex_apps_open_page` and `codex_apps_selected_page_part_N_of_N`, without a non-empty `call_id`, become user reference messages. Their original output is preserved and labeled as reference data, not a system/developer instruction or fabricated tool call.
+For eligible Grok requests, the observed `agent` records named `codex_apps_open_page` and `codex_apps_selected_page_part_N_of_N`, without a non-empty `call_id`, become user reference messages. Their original output is preserved and labeled as reference data, not a system/developer instruction or fabricated tool call.
 
+Web-search history markers with `action.type = "other"` are also preserved as lower-trust reference metadata, because Grok rejects that replay variant after a tool turn. Accepted native search actions and the actual function-call results are left untouched. This continuation repair is included in version 0.1.1.
 Other inputs, valid tools, model settings, and non-target bodies remain unchanged. [Read the exact transformation contract](docs/architecture.md).
 
 ## What gets installed

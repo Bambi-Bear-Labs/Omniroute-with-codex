@@ -28,3 +28,18 @@ Never post keys, cookies, OAuth tokens, account exports, private prompts, or unr
 ## Startup ordering
 
 A Startup-folder entry can start after the client has exhausted retries. Use the documented no-delay sign-in task and active supervisor. A provider ping does not validate that startup path; complete the reboot checklist.
+
+## First reply works, then web/tool follow-ups return 422
+
+Inspect the detailed upstream error. One observed case is:
+
+```text
+web_search_call: action.type: unknown variant `other`
+expected one of `search`, `open_page`, `find_in_page`
+```
+
+This is a history-replay compatibility error, not a sign that the model is offline. Changing Grok versions or creating another chat does not remove a marker that is generated again after tool use.
+
+Release 0.1.1 preserves these unsupported markers as lower-trust reference metadata, leaving actual tool results and accepted search actions intact. Confirm the bridge health response reports `normalizationVersion: 2` and that the running worker has loaded the new modules.
+
+Validate a complete sequence: initial real tool call, tool result, model continuation, then another user follow-up. A first text response or a successful ping does not cover this case. Do not post private conversation logs as a public reproduction; use a synthetic fixture.

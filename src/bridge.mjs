@@ -2,7 +2,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { normalizeContext, parseGrokAliases } from "./normalize.mjs";
+import { normalizeContext, parseGrokAliases, NORMALIZATION_VERSION } from "./normalize.mjs";
 
 export const BRIDGE_ID = "codex-grok-context-bridge-v1";
 export const HEALTH_PATH = "/__codex_grok_bridge_health";
@@ -39,7 +39,7 @@ export function createBridge({
     const pathname = (req.url ?? "").split("?")[0];
     if (exposeHealth && req.method === "GET" && pathname === HEALTH_PATH) {
       res.writeHead(200, { "content-type": "application/json", "cache-control": "no-store" });
-      res.end(JSON.stringify({ id: BRIDGE_ID, pid: process.pid, directory: HERE,
+      res.end(JSON.stringify({ id: BRIDGE_ID, normalizationVersion: NORMALIZATION_VERSION, pid: process.pid, directory: HERE,
         startedAt, upstream, ...stats }));
       return;
     }

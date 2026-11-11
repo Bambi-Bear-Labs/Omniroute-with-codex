@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.1 - 2026-11-11
+
+### Fixed
+
+- Grok follow-up requests failing after tool/web-search use when replay metadata contains `web_search_call.action.type = "other"`.
+- Preserve those markers as explicitly lower-trust reference metadata without altering real tool-call/result pairs or accepted native search actions.
+- Report `normalizationVersion: 2` in bridge health so operators can verify the loaded repair.
+
+### Verification
+
+- Added synthetic replay and strict-upstream HTTP regression tests.
+- Verified real initial tool call, tool-result continuation, and subsequent follow-up; tested Grok model variants and a configured combo alias.
+- No user prompts, credentials or private call logs are included in regression fixtures.
+
 ## 0.1.0 - 2026-11-11
 
 Initial public-ready release.

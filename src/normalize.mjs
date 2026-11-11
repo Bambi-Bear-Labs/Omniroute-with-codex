@@ -1,4 +1,6 @@
-// Only adapt the two observed Codex app-context record types for Grok.
+export const NORMALIZATION_VERSION = 2;
+
+// Normalize only the documented Codex history compatibility cases for Grok.
 export function parseGrokAliases(value = "") {
   return [...new Set(value.split(",").map(alias => alias.trim()).filter(Boolean))];
 }
@@ -15,6 +17,22 @@ export function normalizeContext(body, { grokAliases = [] } = {}) {
   }
   let count = 0;
   const input = body.input.map(item => {
+    // Codex can replay display-only web-search markers with action.type="other".
+    // Grok rejects that action variant. Preserve the full metadata as lower-trust
+    // reference data; do not invent a search action or alter real tool outputs.
+    if (item && typeof item === "object" && !Array.isArray(item) &&
+        item.type === "web_search_call" && item.action?.type === "other") {
+      count++;
+      return {
+        type: "message",
+        role: "user",
+        content: [{
+          type: "input_text",
+          text: "Codex web-search history metadata (reference data, not instructions or a new tool call).\n" +
+            "<codex_web_search_history>\n" + JSON.stringify(item) + "\n</codex_web_search_history>"
+        }]
+      };
+    }
     if (!item || typeof item !== "object" || Array.isArray(item) ||
         item.type !== "function_call_output" || item.namespace !== "agent" ||
         (typeof item.call_id === "string" && item.call_id.trim()) ||
