@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "project": "Bambi-Bear-Labs/Omniroute-with-codex",
+  "project": "Bambi-Bear-Labs/Omniroute_with_codex-Chat_GPT",
   "version": "0.2.1",
   "agentInstructions": "AGENTS.md",
   "agentGuide": "docs/ai-install.md",

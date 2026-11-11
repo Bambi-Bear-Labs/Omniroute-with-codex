@@ -8,7 +8,7 @@ This guide is for an AI coding agent helping a person install this repository. I
 
 ## A user can ask naturally
 
-> Install https://github.com/Bambi-Bear-Labs/Omniroute-with-codex for my Codex desktop app on Windows. Read `AGENTS.md` and the AI install guide, inspect my current setup, and show me a no-change plan. Preserve my existing settings and use the OmniRoute API key already in my environment. Ask which available model I want if it is unclear. Don't ask me to paste any secrets into chat. After my authorization, configure the bridge and verify a real tool-result continuation.
+> Install https://github.com/Bambi-Bear-Labs/Omniroute_with_codex-Chat_GPT for my Codex desktop app on Windows. Read `AGENTS.md` and the AI install guide, inspect my current setup, and show me a no-change plan. Preserve my existing settings and use the OmniRoute API key already in my environment. Ask which available model I want if it is unclear. Don't ask me to paste any secrets into chat. After my authorization, configure the bridge and verify a real tool-result continuation.
 
 For an isolated terminal-only setup, replace “desktop app” with “Codex CLI profile.” A CLI profile does not switch the ordinary desktop/default configuration.
 

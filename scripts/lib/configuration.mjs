@@ -3,7 +3,7 @@ import path from 'node:path';
 import os from 'node:os';
 import crypto from 'node:crypto';
 
-export const OWNER = 'Bambi-Bear-Labs/Omniroute-with-codex';
+export const OWNER = 'Bambi-Bear-Labs/Omniroute_with_codex-Chat_GPT';
 export class SetupError extends Error {
   constructor(code, message) { super(message); this.code = code; }
 }

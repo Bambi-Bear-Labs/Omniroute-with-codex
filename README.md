@@ -10,7 +10,7 @@
 ![Node.js](https://img.shields.io/badge/Node.js-22%2B-234b64.svg)
 ![Windows](https://img.shields.io/badge/Windows-supervised%20startup-234b64.svg)
 ![Dependencies](https://img.shields.io/badge/Runtime%20dependencies-0-007f80.svg)
-[![CI](https://img.shields.io/badge/CI-GitHub%20Actions-234b64.svg)](https://github.com/Bambi-Bear-Labs/Omniroute-with-codex/actions)
+[![CI](https://img.shields.io/badge/CI-GitHub%20Actions-234b64.svg)](https://github.com/Bambi-Bear-Labs/Omniroute_with_codex-Chat_GPT/actions)
 
 **[Quick Start](#quick-start) · [Features](#key-features) · [How It Works](#how-it-works) · [User Guide](docs/user-guide.md) · [Documentation](#documentation) · [Troubleshooting](#troubleshooting)**
 
@@ -38,7 +38,7 @@ An independent, local-first integration by **[BambiBear Labs](https://github.com
 
 You can ask an AI assistant in plain language. For example:
 
-> Install https://github.com/Bambi-Bear-Labs/Omniroute-with-codex for my Codex desktop app on Windows. Read `AGENTS.md` and `docs/ai-install.md`, inspect my existing setup, and show a no-change plan. Preserve my settings, use my existing OmniRoute API key from the environment, and ask which available model I want if unclear. Do not ask me to paste secrets. After authorization, configure the selected route and verify a real tool-result continuation.
+> Install https://github.com/Bambi-Bear-Labs/Omniroute_with_codex-Chat_GPT for my Codex desktop app on Windows. Read `AGENTS.md` and `docs/ai-install.md`, inspect my existing setup, and show a no-change plan. Preserve my settings, use my existing OmniRoute API key from the environment, and ask which available model I want if unclear. Do not ask me to paste secrets. After authorization, configure the selected route and verify a real tool-result continuation.
 
 For a private repository, the agent needs normal authorized GitHub access; do not paste a GitHub token into chat. The repository includes `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and GitHub Copilot guidance. If an agent does not load project instructions automatically, explicitly ask it to read `AGENTS.md` and the AI guide.
 
@@ -98,7 +98,7 @@ Open `http://localhost:20128` for the OmniRoute dashboard. If it is offline, sta
 Choose **Code > Download ZIP**, extract it, and open the extracted folder. Or clone it:
 
 ```powershell
-git clone https://github.com/Bambi-Bear-Labs/Omniroute-with-codex.git
+git clone https://github.com/Bambi-Bear-Labs/Omniroute_with_codex-Chat_GPT.git
 cd Omniroute-with-codex
 ```
 
@@ -315,7 +315,7 @@ Tests use local mock servers, not paid APIs. CI is configured for Windows/Linux 
 
 ## Support and contributions
 
-[Open an issue](https://github.com/Bambi-Bear-Labs/Omniroute-with-codex/issues) with versions, synthetic reproduction steps, and redacted diagnostics. Never post credentials, private prompts, account exports, or personal paths.
+[Open an issue](https://github.com/Bambi-Bear-Labs/Omniroute_with_codex-Chat_GPT/issues) with versions, synthetic reproduction steps, and redacted diagnostics. Never post credentials, private prompts, account exports, or personal paths.
 
 [Contributing](CONTRIBUTING.md) · [Code of conduct](CODE_OF_CONDUCT.md) · [Changelog](CHANGELOG.md)
 
