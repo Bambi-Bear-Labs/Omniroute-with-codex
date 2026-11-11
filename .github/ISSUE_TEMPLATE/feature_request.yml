@@ -1,0 +1,17 @@
+name: Feature request
+description: Suggest a focused improvement.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Explain how this preserves the narrow scope and safety boundaries.
+    validations:
+      required: true

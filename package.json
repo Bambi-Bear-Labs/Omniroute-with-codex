@@ -1,0 +1,21 @@
+{
+  "name": "omniroute-with-codex",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first Codex and OmniRoute compatibility bridge with supervised Windows sign-in startup.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/bridge.mjs",
+    "test": "node --test",
+    "check": "node scripts/check-public-safety.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bambi-Bear-Labs/Omniroute-with-codex.git"
+  },
+  "author": "BambiBear Labs"
+}

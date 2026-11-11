@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible compatibility or startup problem.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: "Never include API keys, OAuth tokens, private prompts, account exports or unredacted personal paths."
+  - type: input
+    id: versions
+    attributes:
+      label: Versions and platform
+      description: OS, Node.js, Codex, OmniRoute and project version.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: Include the route type and whether direct OmniRoute works.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Redacted diagnostics
+      description: Generic errors and task/health status only.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed secrets, private prompts, account exports and personal paths.
+          required: true

@@ -1,0 +1,17 @@
+node_modules/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+config.toml
+auth.json
+runtime.json
+installation.json
+bridge-state.json
+*.sqlite*
+*.db
+backups/
+dist/
+.DS_Store
+Thumbs.db

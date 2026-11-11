@@ -1,0 +1,15 @@
+# Merge these keys at the TOP LEVEL, before any [table].
+model_provider = "omniroute"
+model = "grok-cli/grok-4.7"
+model_reasoning_effort = "high"
+# Optional picker catalog: set a real absolute path for your own user.
+# Generate it with Show-ConfigSnippet.cmd instead of copying another user's path.
+
+[model_providers.omniroute]
+name = "OmniRoute"
+base_url = "http://127.0.0.1:20129/v1"
+env_key = "OMNIROUTE_API_KEY"
+wire_api = "responses"
+http_headers = { "x-omniroute-no-memory" = "true" }
+# Preserve any working requires_openai_auth value from your existing setup.
+# This example intentionally does not force OpenAI authentication for a third-party gateway.
