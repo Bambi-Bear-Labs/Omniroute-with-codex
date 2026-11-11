@@ -2,11 +2,13 @@ param([string]$Model='grok-cli/grok-4.7')
 $catalog=Join-Path $env:USERPROFILE '.codex\omniroute-models.json'
 $catalogToml=ConvertTo-Json -InputObject $catalog -Compress
 $modelToml=ConvertTo-Json -InputObject $Model -Compress
+$catalogLine="# model_catalog_json = $catalogToml # Optional: create this file first."
+if(Test-Path -LiteralPath $catalog){$catalogLine="model_catalog_json = $catalogToml"}
 @"
 # Merge TOP-LEVEL keys before the first TOML [table]. Keep your own default model if preferred.
 model_provider = "omniroute"
 model = $modelToml
-model_catalog_json = $catalogToml
+$catalogLine
 model_reasoning_effort = "high"
 
 # Merge this provider section; never create a duplicate table.

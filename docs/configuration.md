@@ -32,6 +32,8 @@ A masked prompt avoids exposing the value in command history. A user environment
 
 `examples/omniroute-models.example.json` is a small generic example, not a personal catalog or model-availability promise. Check IDs against authenticated `/v1/models`.
 
+If an existing catalog contains other providers, merge new entries instead of replacing it with this small example. Use the copy block below only when intentionally starting a new catalog.
+
 From the repository root:
 
 ```powershell
@@ -58,7 +60,7 @@ For your own order, keep array order and numeric priorities consistent. A picker
 For a new install:
 
 ```powershell
-& .\windows\Install-Bridge.ps1 -GrokAliases 'my-grok-combo'
+& .\Install-Bridge.cmd -GrokAliases 'my-grok-combo'
 ```
 
 The alias is recorded in helper `runtime.json` (not a secret store). Recreate routing definitions separately in OmniRoute.
