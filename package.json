@@ -1,6 +1,6 @@
 {
   "name": "omniroute-with-codex",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "description": "Local-first Codex and OmniRoute compatibility bridge with supervised Windows sign-in startup.",
   "type": "module",
@@ -11,7 +11,12 @@
   "scripts": {
     "start": "node src/bridge.mjs",
     "test": "node --test",
-    "check": "node scripts/check-public-safety.mjs"
+    "check": "node scripts/check-public-safety.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "models": "node scripts/models.mjs",
+    "setup": "node scripts/setup.mjs",
+    "configure": "node scripts/configure-codex.mjs",
+    "smoke": "node scripts/smoke.mjs"
   },
   "repository": {
     "type": "git",

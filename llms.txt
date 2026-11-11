@@ -1,0 +1,14 @@
+# OmniRoute with Codex
+
+> Local-first Grok compatibility bridge for Codex and OmniRoute. Windows supports supervised sign-in startup; the Node.js core can run manually elsewhere.
+
+- [Agent instructions](AGENTS.md)
+- [AI-guided installation](docs/ai-install.md)
+- [Install manifest](install-manifest.json)
+- [Human user guide](docs/user-guide.md)
+- [Windows setup](docs/setup-windows.md)
+- [Configuration and profiles](docs/configuration.md)
+- [Recovery and rollback](docs/recovery.md)
+- [Security](SECURITY.md)
+
+OmniRoute is a separate running prerequisite. No API keys or provider credentials are included. Setup previews by default; `--apply` is required for mutations. A real client/tool-continuation check and a destination reboot remain separate acceptance steps.

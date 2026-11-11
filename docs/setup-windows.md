@@ -5,7 +5,7 @@
 ## Prerequisites
 
 - Windows with Task Scheduler and Windows PowerShell 5.1 or PowerShell 7.
-- A supported Node.js LTS release, version 22+, available as `node.exe`.
+- A supported Node.js LTS release, version 22+, available as `node.exe`. Use a standalone installation; the installer rejects versioned app/sandbox runtimes that may disappear after an app update.
 - Codex installed and launched once, then closed before config edits.
 - OmniRoute configured and running at `http://localhost:20128`.
 - Authorized provider connections and an OmniRoute API key.

@@ -31,6 +31,10 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npm test
       - run: npm run check
+      - name: Verify the agent setup preview is read-only
+        run: node scripts/setup.mjs --mode cli --model example/model --codex-home .ci-preview --dry-run --json
+      - name: Confirm preview created no directory
+        run: node -e "if (require('node:fs').existsSync('.ci-preview')) process.exit(1)"
       - name: Parse Windows scripts and preview installation
         if: runner.os == 'Windows'
         shell: powershell

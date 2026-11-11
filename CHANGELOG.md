@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.0 - 2026-11-11
+
+### Added
+
+- Agent-readable `AGENTS.md`, detailed installation guide, and machine-readable install manifest.
+- Read-only JSON doctor and bounded model discovery without printing credentials.
+- Preview-first setup with explicit Windows bridge installation/reuse and separate CLI-profile or desktop configuration modes.
+- Local backups, idempotent application, ownership checks, concurrency guards, and conservative rollback.
+- An opt-in three-request synthetic tool-continuation smoke test with explicit quota disclosure.
+- Isolated tests for configuration preservation, unsafe paths, conflicts, rollback and task decisions.
+
+### Compatibility
+
+The revision 2 web-search continuation repair remains included. The installer does not start OmniRoute, restore provider accounts, or claim that a particular desktop/reboot workflow is verified by mock tests.
+
 ## 0.1.1 - 2026-11-11
 
 ### Fixed

@@ -17,13 +17,27 @@ Follow Windows setup from the beginning. Reconnect authorized providers and recr
 
 Do not use an old `runtime.json`, another user's exported task/SID, or an entire machine-specific Codex config as the installer. The setup script discovers the destination Node.js path and current user.
 
+## Undo an AI-managed configuration
+
+If this setup created a CLI profile or modified the desktop config, preview the scoped rollback first:
+
+```powershell
+node scripts/configure-codex.mjs --mode desktop --rollback --dry-run --json
+```
+
+Use `--mode cli` and the same `--profile` for an isolated CLI profile. Replace `--dry-run` with `--apply` only when the displayed target and rollback are authorized. Backups are retained and can contain sensitive settings already present in the original file.
+
+Automatic rollback refuses to overwrite later changes. If the user or another program edited the config since setup, stop and review a minimal manual merge; do not force a whole-file restore. A manually configured, reused bridge has no project-owned config rollback state.
+
+Configuration rollback does not remove the Windows task. Restore the intended Codex route first, then remove only the owned helper task if desired.
+
 ## Emergency direct route
 
 1. Close Codex and back up `config.toml`.
 2. Change only the OmniRoute provider URL to `http://localhost:20128/v1`.
 3. Reopen Codex and test another provider.
 
-This bypasses the bridge. It may restore other models while leaving the original Grok context mismatch unresolved.
+This bypasses the bridge. It may restore other models while leaving the original Grok context mismatch unresolved. A manual change after AI-managed setup alters the config checksum; subsequent automatic rollback will intentionally require review.
 
 ## Remove the managed task
 

@@ -15,3 +15,7 @@ backups/
 dist/
 .DS_Store
 Thumbs.db
+# Protect generated Codex profiles and installer state from accidental commits.
+*.config.toml
+!examples/*.config.toml
+.omniroute-with-codex/

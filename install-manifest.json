@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "project": "Bambi-Bear-Labs/Omniroute-with-codex",
+  "version": "0.2.0",
+  "agentInstructions": "AGENTS.md",
+  "agentGuide": "docs/ai-install.md",
+  "defaultBehavior": "dry-run; no writes or task changes without --apply",
+  "automaticSetupPlatforms": [
+    "win32"
+  ],
+  "cliProfileConfigurationPlatforms": [
+    "win32",
+    "darwin",
+    "linux"
+  ],
+  "supportedTargets": {
+    "cli": "An isolated, named profile; does not edit the main Codex config.",
+    "desktop": "Explicitly updates only the selected root model/provider and a project-owned provider block, with a protected backup."
+  },
+  "localEndpoints": {
+    "omniroute": "http://localhost:20128/v1",
+    "bridge": "http://127.0.0.1:20129/v1",
+    "health": "http://127.0.0.1:20129/__codex_grok_bridge_health"
+  },
+  "requiredCredentialEnvironmentVariable": "OMNIROUTE_API_KEY",
+  "commands": {
+    "inspect": [
+      "node",
+      "scripts/doctor.mjs",
+      "--json"
+    ],
+    "discoverModels": [
+      "node",
+      "scripts/models.mjs",
+      "--contains",
+      "grok",
+      "--json"
+    ],
+    "preview": [
+      "node",
+      "scripts/setup.mjs",
+      "--mode",
+      "<cli-or-desktop>",
+      "--model",
+      "<available-model-id>",
+      "--dry-run",
+      "--json"
+    ],
+    "apply": [
+      "node",
+      "scripts/setup.mjs",
+      "--mode",
+      "<cli-or-desktop>",
+      "--model",
+      "<available-model-id>",
+      "--apply",
+      "--json"
+    ],
+    "smokePreview": [
+      "node",
+      "scripts/smoke.mjs",
+      "--model",
+      "<available-grok-id>",
+      "--json"
+    ],
+    "smokeWithExplicitQuotaUse": [
+      "node",
+      "scripts/smoke.mjs",
+      "--model",
+      "<available-grok-id>",
+      "--run",
+      "--json"
+    ],
+    "rollbackPreview": [
+      "node",
+      "scripts/configure-codex.mjs",
+      "--mode",
+      "<cli-or-desktop>",
+      "--rollback",
+      "--dry-run",
+      "--json"
+    ]
+  },
+  "safety": {
+    "apiKeyAsArgumentSupported": false,
+    "printsCredentials": false,
+    "installsOrStartsOmniRoute": false,
+    "changesProviderAccounts": false,
+    "overwritesUnownedProfiles": false,
+    "stopsUnknownProcesses": false,
+    "fullRebootVerifiedByInstaller": false,
+    "backupMayContainPreexistingSecrets": true,
+    "concurrentEditPolicy": "Checks before writes; no interprocess file lock is guaranteed."
+  },
+  "requiredHumanOrEnvironmentActions": [
+    "Choose CLI or desktop and authorize the intended configuration changes.",
+    "Ensure OmniRoute is running and provider accounts/model access are configured.",
+    "Provide the existing OmniRoute API key securely through the environment, not the AI prompt.",
+    "Approve any relevant operating-system permissions and any billable/quota-using real model test.",
+    "Validate the actual requested client and the next Windows reboot when applicable."
+  ],
+  "notes": [
+    "The bridge includes normalization revision 2 for Grok web-search action.type other replay.",
+    "A local managed-requirements file, an unowned task/profile/provider, unsupported TOML, or later edits require manual review.",
+    "The doctor checks local gateway and bridge readiness only; it cannot prove desktop behavior or a reboot.",
+    "Example catalogs and model IDs are not account entitlements or guaranteed to exist."
+  ],
+  "minimumNormalizationVersion": 2
+}

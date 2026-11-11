@@ -34,6 +34,24 @@ An independent, local-first integration by **[BambiBear Labs](https://github.com
 | Reinstalling or migrating | [Recovery SOP](docs/recovery.md) - reuse, restore, migrate, roll back |
 | Something fails | [Troubleshooting](docs/troubleshooting.md) - diagnose without breaking other models |
 
+## Install with an AI coding agent
+
+You can ask an AI assistant in plain language. For example:
+
+> Install https://github.com/Bambi-Bear-Labs/Omniroute-with-codex for my Codex desktop app on Windows. Read `AGENTS.md` and `docs/ai-install.md`, inspect my existing setup, and show a no-change plan. Preserve my settings, use my existing OmniRoute API key from the environment, and ask which available model I want if unclear. Do not ask me to paste secrets. After authorization, configure the selected route and verify a real tool-result continuation.
+
+For a private repository, the agent needs normal authorized GitHub access; do not paste a GitHub token into chat. The repository includes `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and GitHub Copilot guidance. If an agent does not load project instructions automatically, explicitly ask it to read `AGENTS.md` and the AI guide.
+
+For a terminal-only setup, ask for an **isolated Codex CLI profile** instead. The AI workflow uses read-only diagnostics, a dry run, an explicit apply step, backups, ownership checks, and scoped rollback. Actual provider sign-in, runtime permissions, and quota-using verification still require appropriate authorization.
+
+```powershell
+node scripts/doctor.mjs --json
+node scripts/models.mjs --contains grok --limit 20 --json
+node scripts/setup.mjs --mode cli --model 'grok-cli/grok-4.7' --dry-run --json
+```
+
+Replace the example model with one actually available from your server. Explicit `--mode desktop` changes the selected desktop provider/model; CLI mode leaves the main Codex config alone. [Full AI installation guide](docs/ai-install.md) · [Machine-readable manifest](install-manifest.json)
+
 ## Why this project exists
 
 A provider can appear connected in OmniRoute and respond from another client, yet fail from Codex. One observed cause is an extra app-context record shaped as a tool output without a matching tool call:
@@ -58,6 +76,8 @@ This is **not a general Responses API translator**. Outages, invalid keys, unava
 | Automatic bridge startup | Limited-privilege sign-in task with no configured delay. |
 | Recovery | Active supervisor restarts an exited Node.js worker. |
 | Custom Grok combos | Explicit alias opt-in; unrelated combos are not rewritten. |
+| AI-ready installation | Read-only doctor, machine-readable plan, explicit apply, conflict checks and rollback. |
+| Opt-in CLI profile | Keep the ordinary Codex configuration unchanged; choose desktop mode explicitly when desired. |
 | No runtime npm dependencies | Implementation uses Node.js built-ins. |
 | Recovery documentation | Config examples, diagnostics, catalogs, rollback, and reboot checks. |
 
@@ -265,6 +285,7 @@ Reuse a healthy helper after a Codex-only reinstall. For complete repair, follow
 
 | Guide | What it covers |
 | --- | --- |
+| [AI installation](docs/ai-install.md) | Agent instructions, dry run, explicit apply, validation and rollback |
 | [User guide](docs/user-guide.md) | First-time setup, daily use, and a visible response |
 | [Windows setup](docs/setup-windows.md) | Installation, task settings, reboot acceptance |
 | [Configuration](docs/configuration.md) | API key, TOML, catalog, and aliases |

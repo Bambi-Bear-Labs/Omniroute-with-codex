@@ -10,13 +10,15 @@ $kitRoot=Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot=Split-Path -Parent $kitRoot
 $payload=$kitRoot
 . (Join-Path $payload 'Bridge-Common.ps1')
+. (Join-Path $payload 'Bridge-Decision.ps1')
 $InstallDirectory=[System.IO.Path]::GetFullPath($InstallDirectory)
 if(-not $NodePath){$NodePath=(Get-Command node.exe -ErrorAction Stop).Source}
 if(-not(Test-Path -LiteralPath $NodePath)){throw 'Install Node.js before installing the bridge.'}
 $NodePath=(Get-Item -LiteralPath $NodePath).FullName
 $identity=[System.Security.Principal.WindowsIdentity]::GetCurrent()
-$plan=[ordered]@{install_directory=$InstallDirectory;task_name=$TaskName;user=$identity.Name;node_executable=$NodePath;trigger='At user sign-in; no delay';codex_config_modified=$false;omniroute_started_or_modified=$false}
+$plan=[ordered]@{install_directory=$InstallDirectory;task_name=$TaskName;user=$identity.Name;node_executable=$NodePath;trigger='At user sign-in; no delay';codex_config_modified=$false;omniroute_started_or_modified=$false;transient_node_runtime=[bool](Test-TransientNodePath $NodePath)}
 if($WhatIfPreference){$plan|ConvertTo-Json;return}
+if(Test-TransientNodePath $NodePath){throw 'Use a standalone Node.js LTS installation; versioned app/sandbox runtimes may disappear after updates.'}
 if($InstallDirectory -match '#!sandbox'){throw 'Run the installer from a normal Windows terminal, not an app sandbox.'}
 Import-Module ScheduledTasks -ErrorAction Stop
 if(Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue){throw 'Task already exists. For a Codex-only reinstall, reuse the healthy bridge. Do not create duplicates. See the SOP before a full repair.'}
