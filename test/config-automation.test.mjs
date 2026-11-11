@@ -6,16 +6,20 @@ import path from 'node:path';
 import { planConfiguration, publicPlan, applyConfiguration, configurationText } from '../scripts/lib/configuration.mjs';
 import { configure } from '../scripts/configure-codex.mjs';
 import { setup } from '../scripts/setup.mjs';
+import { fileURLToPath } from 'node:url';
+const REPO_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 async function withHome(fn) {
-  const root=fs.realpathSync(os.tmpdir());
-  const home=fs.mkdtempSync(path.join(root,'omniroute-codex-test-'));
+  const rootDir = path.join(REPO_DIR, '.tmp-test-homes');
+  fs.mkdirSync(rootDir, { recursive: true });
+  const testRoot = fs.realpathSync(rootDir);
+  const home = fs.mkdtempSync(path.join(testRoot, 'omniroute-codex-test-'));
   try { return await fn(home); }
   finally {
-    const resolved=fs.realpathSync(home);
-    assert.equal(path.dirname(resolved),root);
+    const resolved = fs.realpathSync(home);
+    assert.equal(path.dirname(resolved), testRoot);
     assert.ok(path.basename(resolved).startsWith('omniroute-codex-test-'));
-    fs.rmSync(resolved,{recursive:true,force:true});
+    fs.rmSync(resolved, { recursive: true, force: true });
   }
 }
 const options=(home,mode='cli',extra={})=>({home,mode,model:'grok-cli/grok-4.7',...extra});

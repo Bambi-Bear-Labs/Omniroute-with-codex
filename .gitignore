@@ -19,3 +19,5 @@ Thumbs.db
 *.config.toml
 !examples/*.config.toml
 .omniroute-with-codex/
+
+.tmp-test-homes/

@@ -15,7 +15,7 @@ function Get-MockProcess { [CmdletBinding()]param($Id) return [pscustomobject]@{
 function Stop-MockProcess {param($Id) [IO.File]::WriteAllText((Join-Path $PSScriptRoot 'stop-worker.txt'),'yes')}
 `;
 function fixture(state,callback){
- const temp=fs.realpathSync(os.tmpdir());const dir=fs.mkdtempSync(path.join(temp,'omniroute-codex-uninstall-test-'));let timedOut=false;
+ const tempDir=path.join(root,'.tmp-test-homes'); fs.mkdirSync(tempDir,{recursive:true}); const temp=fs.realpathSync(tempDir); fs.mkdirSync(temp,{recursive:true});const dir=fs.mkdtempSync(path.join(temp,'omniroute-codex-uninstall-test-'));let timedOut=false;
  try{
   let script=fs.readFileSync(path.join(root,'windows','Uninstall-Bridge.ps1'),'utf8');
   for(const [actual,mock] of [['Unregister-ScheduledTask','Unregister-MockTask'],['Stop-ScheduledTask','Stop-MockTask'],['Get-ScheduledTask','Get-MockTask'],['Get-Process','Get-MockProcess'],['Stop-Process','Stop-MockProcess']])script=script.replaceAll(actual,mock);

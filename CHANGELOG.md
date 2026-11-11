@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.1 - 2026-11-11
+
+### Fixed
+
+- Normalized all standalone `function_call_output` items without `call_id` (including `browser_tabs`, `codex_apps_open_page`, and ambient UI state).
+- Prevents HTTP 422 `missing field call_id` errors when browser context or tools are invoked during multi-turn chats.
+- Bumped normalization revision to 3.
+
+
 ## 0.2.0 - 2026-11-11
 
 ### Added

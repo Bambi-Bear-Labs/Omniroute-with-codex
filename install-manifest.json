@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "project": "Bambi-Bear-Labs/Omniroute-with-codex",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "agentInstructions": "AGENTS.md",
   "agentGuide": "docs/ai-install.md",
   "defaultBehavior": "dry-run; no writes or task changes without --apply",
@@ -105,5 +105,5 @@
     "The doctor checks local gateway and bridge readiness only; it cannot prove desktop behavior or a reboot.",
     "Example catalogs and model IDs are not account entitlements or guaranteed to exist."
   ],
-  "minimumNormalizationVersion": 2
+  "minimumNormalizationVersion": 3
 }

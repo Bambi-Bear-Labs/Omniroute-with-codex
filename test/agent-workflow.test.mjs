@@ -13,7 +13,10 @@ import { planConfiguration } from '../scripts/lib/configuration.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 async function withHome(fn){
- const tmp=fs.realpathSync(os.tmpdir());const home=fs.mkdtempSync(path.join(tmp,'omniroute-codex-agent-test-'));
+ const testDir = path.join(root, '.tmp-test-homes');
+ fs.mkdirSync(testDir, { recursive: true });
+ const tmp = fs.realpathSync(testDir);
+ const home = fs.mkdtempSync(path.join(tmp, 'omniroute-codex-agent-test-'));
  try{return await fn(home)}finally{const resolved=fs.realpathSync(home);assert.equal(path.dirname(resolved),tmp);assert.ok(path.basename(resolved).startsWith('omniroute-codex-agent-test-'));fs.rmSync(resolved,{recursive:true,force:true})}
 }
 const result=(data,status=200)=>({ok:status>=200&&status<300,status,json:async()=>data});

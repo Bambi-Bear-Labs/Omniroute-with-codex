@@ -21,7 +21,7 @@ function Register-MockTask {param($TaskName,$InputObject) $script:mockTask=$true
 function Start-MockTask {param($TaskName) $script:mockReady=$true;[IO.File]::WriteAllText((Join-Path $script:repoRoot 'mock-task-started.txt'),'yes')}
 `;
 test('Windows installer completes against mocked task APIs without touching live settings',{skip:process.platform!=='win32',timeout:45000},()=>{
- const temp=fs.realpathSync(os.tmpdir());const dir=fs.mkdtempSync(path.join(temp,'omniroute-codex-installer-test-'));let timedOut=false;
+ const tempDir=path.join(root,'.tmp-test-homes'); fs.mkdirSync(tempDir,{recursive:true}); const temp=fs.realpathSync(tempDir); fs.mkdirSync(temp,{recursive:true});const dir=fs.mkdtempSync(path.join(temp,'omniroute-codex-installer-test-'));let timedOut=false;
  try{
   for(const name of ['src','windows','test'])fs.mkdirSync(path.join(dir,name));
   for(const name of ['bridge.mjs','normalize.mjs'])fs.copyFileSync(path.join(root,'src',name),path.join(dir,'src',name));
